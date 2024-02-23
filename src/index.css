@@ -1,13 +1,370 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.container {
+  padding: 20px;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+/*----------------------Header--------------------*/
+header {
+  margin-bottom: 50px;
+}
+
+/*----------------------TripList------------------*/
+.trip-list {
+  height: 205px; /* Adjust the height as needed */
+  overflow-y: scroll;
+  margin-bottom: 40px;
+  margin-right: 30px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  gap: 30px;
+  justify-content: flex-start;
+}
+
+.trip-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background: transparent;
+  transition: transform 200ms;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: blue;
+    color: #e6ebf4;
+  }
+}
+
+.trip-card {
+  width: 175px;
+  height: 200px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.trip-card:hover {
+  border-color: lightblue;
+}
+
+.trip-image {
+  width: 175px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.trip-wrap {
+  padding: 15px;
+}
+
+.trip-city {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.trip-schedule {
+  font-size: 12px;
+}
+
+/*------------------------Modal ------------------*/
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(10px);
+
+  overflow-y: scroll;
+  padding-top: 50px;
+  padding-bottom: 500px;
+}
+
+.modal-container {
+  position: relative;
+
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  width: 500px;
+}
+
+.modal-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  color: #ccc;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-divider {
+  border: none;
+  height: 1px;
+  background-color: #ccc; /* Change color as needed */
+  margin-bottom: 20px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.label-text {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  display: block;
+  width: 400px;
+  height: 30px;
+  padding-left: 10px;
+}
+
+.form-select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-option {
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.button-container-scroll {
+  justify-content: flex-start;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.button {
+  width: 175px;
+  height: 120px;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  transition: transform 200ms;
+  background-color: #e6ebf4;
+  border-color: transparent;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
+.button-modal {
+  width: 100px;
+  height: 30px;
+  margin: 0;
+  &:hover {
+    background-color: blue;
+    color: #e6ebf4;
+  }
+}
+
+.button-scroll {
+  transition: transform 200ms;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: blue;
+    color: #e6ebf4;
+  }
+}
+
+/*-------------------------App-----------------------------*/
+
+.tripList-wrapper {
+  display: flex;
+}
+
+/*-----------------------forecastList---------------------*/
+.forecast-list {
+  max-width: 65%;
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/*----------------------TripDetail---------------------*/
+.trip-details {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  background-color: #1e213a;
+  background-image: url("./assets/cloud.png"), url("./assets/cloud.png");
+  background-size: 70%, 70%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: left top, right bottom;
+  color: white;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.user-avatar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.trip-details::before,
+.trip-details::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 100px;
+  background-image: url("./assets/cloud.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.trip-details::before {
+  top: 20%;
+  left: 70%;
+}
+
+.trip-details::after {
+  top: 50%;
+  left: -5%;
+}
+
+.weather-icon-and-temp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.trip-weather-icon {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.trip-temperature {
+  font-size: 2em;
+  margin: 0;
+}
+
+.trip-detail-city {
+  font-size: 1.5em;
+  margin-bottom: 100px;
+  font-weight: 300;
+}
+
+.countdown {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  border-radius: 15px;
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-item p {
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+.countdown-item span {
+  font-size: 0.7em; /* Smaller text for labels (days, hours, etc.) */
+  display: block;
 }
