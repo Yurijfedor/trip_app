@@ -19,7 +19,7 @@ const TripDetails = () => {
       <div className="weather-icon-and-temp">
         <img
           className="trip-weather-icon"
-          src={`/weatherIcons/png/set_color/${selectedTrip.currentWeather.days[0].icon}.png`}
+          src={`${process.env.PUBLIC_URL}/weatherIcons/png/set_color/${selectedTrip.currentWeather.days[0].icon}.png`}
           alt={selectedTrip.currentWeather.days[0].icon}
         />
         <p className="trip-temperature">
@@ -30,7 +30,6 @@ const TripDetails = () => {
 
       <h3 className="trip-detail-city">{selectedTrip.city}</h3>
       <div className="countdown">
-        {/* The CountdownTimer component will need to output divs with a class of 'countdown-item' */}
         <CountdownTimer startTime={`${selectedTrip.startDate}T23:59:59`} />
       </div>
     </div>

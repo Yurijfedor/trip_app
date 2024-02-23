@@ -5,6 +5,7 @@ import {
   fetchCurrentWeather,
 } from "./operations";
 import { generateDateRange } from "../utils/dateUtils";
+import City from "../assets/city.jpeg";
 
 const { startDate, endDate } = generateDateRange(7);
 
@@ -16,6 +17,7 @@ const initialState = {
       startDate,
       endDate,
       picture: "",
+      forecast: "",
     },
   ],
   selectedTrip: null,
@@ -70,7 +72,6 @@ const tripSlice = createSlice({
         };
       })
       .addCase(fetchPictures.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loading = false;
         state.trips = state.trips.map((trip) =>
           trip.city === action.payload.city
@@ -78,8 +79,7 @@ const tripSlice = createSlice({
               ? { ...trip, picture: action.payload.picture }
               : {
                   ...trip,
-                  picture:
-                    "https://pixabay.com/get/gf611a0bbb493ef03f2d27f297bd1a8fef479c6c0c5d2e8aeb7705a341f37c6ff8af92e6ee264a1191842807486fa9e575721d06f12d17ff004215f0611f23417_640.jpg",
+                  picture: { City },
                 }
             : trip
         );

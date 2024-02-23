@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/trip_app/static/css/main.42dc1425.css",
+    "main.js": "/trip_app/static/js/main.130c42ae.js",
+    "static/media/cloud.png": "/trip_app/static/media/cloud.0e25fccb4787103d1e1c.png",
+    "index.html": "/trip_app/index.html",
+    "static/media/icons8-search.svg": "/trip_app/static/media/icons8-search.beed9f0b660ef7265a138374bf1b9743.svg",
+    "static/media/plus-icon.svg": "/trip_app/static/media/plus-icon.56563101038eb14c318f3498f81935f5.svg",
+    "main.42dc1425.css.map": "/trip_app/static/css/main.42dc1425.css.map",
+    "main.130c42ae.js.map": "/trip_app/static/js/main.130c42ae.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.42dc1425.css",
+    "static/js/main.130c42ae.js"
+  ]
+}

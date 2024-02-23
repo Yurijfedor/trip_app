@@ -10,7 +10,6 @@ const SignInButton = () => {
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result);
         const user = result.user;
         dispatch(
           setUser({

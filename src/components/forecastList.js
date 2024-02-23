@@ -1,11 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getDayOfWeek } from "../utils/dateUtils";
-import { selectTrips, selectSelectedTrip } from "../redux/selectors";
+import { selectSelectedTrip } from "../redux/selectors";
 
 const ForecastList = () => {
   const selectedTrip = useSelector(selectSelectedTrip);
-  console.log(selectedTrip);
 
   return (
     <div style={{ flex: 1 }}>
@@ -18,7 +17,7 @@ const ForecastList = () => {
             </div>
             <img
               style={{ marginBottom: "15px" }}
-              src={`/weatherIcons/png/set_color/${day.icon}.png`}
+              src={`${process.env.PUBLIC_URL}/weatherIcons/png/set_color/${day.icon}.png`}
               alt={day.icon}
             />
             <p>

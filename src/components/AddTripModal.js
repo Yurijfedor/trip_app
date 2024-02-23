@@ -19,7 +19,6 @@ const AddTrip = ({ showAddModal, closeModal }) => {
 
   useEffect(() => {
     if (newTrip.city.length > 2) {
-      console.log(newTrip.city);
       dispatch(fetchCitySuggestions(newTrip.city)).then((response) => {
         setCitySuggestions(response.payload.data);
       });
@@ -66,7 +65,7 @@ const AddTrip = ({ showAddModal, closeModal }) => {
           <form className="modal-form">
             <div className="form-group">
               <label className="form-label">
-                <span class="label-text">
+                <span className="label-text">
                   <span style={{ color: "red" }}>*</span> City
                 </span>
                 <input
@@ -87,7 +86,7 @@ const AddTrip = ({ showAddModal, closeModal }) => {
             </div>
             <div className="form-group">
               <label className="form-label">
-                <span class="label-text">
+                <span className="label-text">
                   <span style={{ color: "red" }}>*</span> Start date
                 </span>
 
@@ -104,7 +103,7 @@ const AddTrip = ({ showAddModal, closeModal }) => {
             </div>
             <div className="form-group">
               <label className="form-label">
-                <span class="label-text">
+                <span className="label-text">
                   <span style={{ color: "red" }}>*</span> End date
                 </span>
 

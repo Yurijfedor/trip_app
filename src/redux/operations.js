@@ -4,10 +4,15 @@ import axios from "axios";
 export const fetchWeatherForTrip = createAsyncThunk(
   "trip/fetchWeather",
   async ({ city, startDate, endDate }) => {
-    const response = await axios.get(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=74M3LM9R9KVSRGJ6K65SKJJ9A&contentType=json&iconSet=icons1`
-    );
-    return response.data;
+    try {
+      const response = await axios.get(
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=74M3LM9R9KVSRGJ6K65SKJJ9A&contentType=json&iconSet=icons1`
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      return city;
+    }
   }
 );
 
