@@ -20,7 +20,7 @@ const TripList = ({ openDeleteModal }) => {
   const trips = useSelector(selectTrips);
   const selectedTrip = useSelector(selectSelectedTrip);
   const visibleTrips = useSelector(selectVisibleTrips);
-  console.log(trips);
+
   useEffect(() => {
     trips.forEach((trip) => {
       if (!trip.picture) {

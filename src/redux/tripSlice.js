@@ -6,7 +6,6 @@ import {
   fetchCitySuggestions,
 } from "./operations";
 import { generateDateRange } from "../utils/dateUtils";
-import City from "../assets/city.jpeg";
 
 const { startDate, endDate } = generateDateRange(7);
 

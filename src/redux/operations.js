@@ -1,12 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+const rapidApiKey = process.env.REACT_APP_RAPIDAPI_API_KEY;
+const pixabayApiKey = process.env.REACT_APP_PIXABAY_API_KEY;
+
 export const fetchWeatherForTrip = createAsyncThunk(
   "trip/fetchWeather",
   async ({ city, startDate, endDate }) => {
     try {
       const response = await axios.get(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=74M3LM9R9KVSRGJ6K65SKJJ9A&contentType=json&iconSet=icons1`
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${apiKey}&contentType=json&iconSet=icons1`
       );
       return response.data;
     } catch (error) {
@@ -20,7 +24,7 @@ export const fetchCurrentWeather = createAsyncThunk(
   "trip/fetchCurrentWeather",
   async (city) => {
     const response = await axios.get(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=74M3LM9R9KVSRGJ6K65SKJJ9A&contentType=json`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=${apiKey}&contentType=json`
     );
     return response.data;
   }
@@ -34,13 +38,12 @@ export const fetchCitySuggestions = createAsyncThunk(
       url: "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
       params: { namePrefix: searchTerm, limit: 5, offset: 0 },
       headers: {
-        "X-RapidAPI-Key": "9825dcf433msh49522f141e59e01p1ffcf3jsn7272e748f867", // Replace with your actual API key
+        "X-RapidAPI-Key": rapidApiKey,
         "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
       },
     };
 
     const response = await axios.request(options);
-    console.log(response.data);
     return response.data;
   }
 );
@@ -50,7 +53,7 @@ export const fetchPictures = createAsyncThunk(
   async (city) => {
     try {
       const BASE_URL = "https://pixabay.com/api/";
-      const API_KEY = "29711161-732b17ef7029dbffa0827fda9";
+      const API_KEY = pixabayApiKey;
       const options = new URLSearchParams({
         image_type: "photo",
         orientation: "horizontal",
