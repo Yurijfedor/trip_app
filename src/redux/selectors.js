@@ -3,6 +3,7 @@ import { createSelector } from "@reduxjs/toolkit";
 export const selectTrips = (state) => state.trip.trips;
 export const selectSelectedTrip = (state) => state.trip.selectedTrip;
 export const selectSearshTerm = (state) => state.filter.searchTerm;
+export const selectCitySuggestions = (state) => state.trip.citySuggestions;
 export const selectUser = (state) => state.user;
 export const selectIsLoading = (state) => state.trip.loading;
 export const selectError = (state) => state.trip.error;

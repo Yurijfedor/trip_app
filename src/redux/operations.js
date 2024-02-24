@@ -29,10 +29,18 @@ export const fetchCurrentWeather = createAsyncThunk(
 export const fetchCitySuggestions = createAsyncThunk(
   "city/fetchCitySuggestion",
   async (searchTerm) => {
-    const response = await axios.get(
-      `http://geodb-free-service.wirefreethought.com/v1/geo/places?limit=5&offset=0&namePrefix=${searchTerm}`
-    );
+    const options = {
+      method: "GET",
+      url: "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
+      params: { namePrefix: searchTerm, limit: 5, offset: 0 },
+      headers: {
+        "X-RapidAPI-Key": "9825dcf433msh49522f141e59e01p1ffcf3jsn7272e748f867", // Replace with your actual API key
+        "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
+      },
+    };
 
+    const response = await axios.request(options);
+    console.log(response.data);
     return response.data;
   }
 );

@@ -3,6 +3,7 @@ import {
   fetchWeatherForTrip,
   fetchPictures,
   fetchCurrentWeather,
+  fetchCitySuggestions,
 } from "./operations";
 import { generateDateRange } from "../utils/dateUtils";
 import City from "../assets/city.jpeg";
@@ -18,6 +19,7 @@ const initialState = {
       endDate,
       picture: "",
       forecast: "",
+      citySuggestions: [],
     },
   ],
   selectedTrip: null,
@@ -71,6 +73,9 @@ const tripSlice = createSlice({
           currentWeather: action.payload,
         };
       })
+      .addCase(fetchCitySuggestions.fulfilled, (state, action) => {
+        state.citySuggestions = [...action.payload.data];
+      })
       .addCase(fetchPictures.fulfilled, (state, action) => {
         state.loading = false;
         state.trips = state.trips.map((trip) =>
@@ -79,7 +84,7 @@ const tripSlice = createSlice({
               ? { ...trip, picture: action.payload.picture }
               : {
                   ...trip,
-                  picture: { City },
+                  picture: `${process.env.PUBLIC_URL}/city.jpeg`,
                 }
             : trip
         );

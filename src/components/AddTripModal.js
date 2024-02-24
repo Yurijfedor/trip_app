@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { addTrip } from "../redux/tripSlice";
 import { fetchCitySuggestions } from "../redux/operations";
+import { selectCitySuggestions } from "../redux/selectors";
 import { ModalBackdrop } from "./ModalBackdrop";
 import { generateDateRange, isValidDate } from "../utils/dateUtils";
+import useThrottledDispatch from "../hooks/ThrottledDispatch";
 
 const AddTrip = ({ showAddModal, closeModal }) => {
   const dispatch = useDispatch();
+  const citySuggestions = useSelector(selectCitySuggestions);
+  const throttledFetchCitySuggestions = useThrottledDispatch(
+    fetchCitySuggestions,
+    250
+  );
 
   const [newTrip, setNewTrip] = useState({
     city: "",
@@ -15,15 +22,11 @@ const AddTrip = ({ showAddModal, closeModal }) => {
     endDate: "",
   });
 
-  const [citySuggestions, setCitySuggestions] = useState([]);
-
   useEffect(() => {
     if (newTrip.city.length > 2) {
-      dispatch(fetchCitySuggestions(newTrip.city)).then((response) => {
-        setCitySuggestions(response.payload.data);
-      });
+      throttledFetchCitySuggestions(newTrip.city);
     }
-  }, [newTrip.city, dispatch]);
+  }, [newTrip.city, throttledFetchCitySuggestions]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,7 +81,7 @@ const AddTrip = ({ showAddModal, closeModal }) => {
                   list="city-suggestions"
                 />
                 <datalist id="city-suggestions">
-                  {citySuggestions.map((suggestion) => (
+                  {citySuggestions?.map((suggestion) => (
                     <option key={suggestion.id} value={suggestion.name} />
                   ))}
                 </datalist>
