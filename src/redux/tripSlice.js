@@ -58,10 +58,13 @@ const tripSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchWeatherForTrip.fulfilled, (state, action) => {
+        console.log("hello");
         state.loading = false;
         state.trips = state.trips.map((trip) =>
-          trip.city === action.payload.address
-            ? { ...trip, forecast: action.payload }
+          trip.city === action.payload.city
+            ? !action.payload.errorMessage
+              ? { ...trip, forecast: action.payload.forecast }
+              : { ...trip, forecast: action.payload.errorMessage }
             : trip
         );
       })

@@ -6,7 +6,9 @@ import { selectSelectedTrip } from "../redux/selectors";
 const ForecastList = () => {
   const selectedTrip = useSelector(selectSelectedTrip);
 
-  return (
+  return typeof selectedTrip.forecast === "string" ? (
+    <h2>{selectedTrip.forecast}</h2>
+  ) : (
     <div style={{ flex: 1 }}>
       <h2 style={{ marginBottom: "50px", display: "block" }}>Week</h2>
       <ul className="forecast-list">

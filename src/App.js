@@ -86,7 +86,7 @@ function App() {
             {selectedTrip && selectedTrip.forecast && <ForecastList />}
           </div>
           <div style={{ minHeight: "100%", flex: 1 }}>
-            {selectedTrip && selectedTrip.currentWeather && <TripDetails />}
+            <TripDetails />
           </div>
         </div>
       )}

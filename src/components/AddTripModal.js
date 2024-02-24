@@ -98,7 +98,11 @@ const AddTrip = ({ showAddModal, closeModal }) => {
                   type="date"
                   name="startDate"
                   min={generateDateRange().minDate}
-                  max={generateDateRange().maxDate}
+                  max={
+                    newTrip.endDate
+                      ? newTrip.endDate
+                      : generateDateRange().maxDate
+                  }
                   value={newTrip.startDate}
                   onChange={handleInputChange}
                 />
@@ -114,7 +118,11 @@ const AddTrip = ({ showAddModal, closeModal }) => {
                   className="form-input"
                   type="date"
                   name="endDate"
-                  min={generateDateRange().minDate}
+                  min={
+                    newTrip.startDate
+                      ? newTrip.startDate
+                      : generateDateRange().minDate
+                  }
                   max={generateDateRange().maxDate}
                   value={newTrip.endDate}
                   onChange={handleInputChange}

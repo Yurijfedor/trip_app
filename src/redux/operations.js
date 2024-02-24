@@ -12,10 +12,17 @@ export const fetchWeatherForTrip = createAsyncThunk(
       const response = await axios.get(
         `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${apiKey}&contentType=json&iconSet=icons1`
       );
-      return response.data;
+      const forecast = response.data;
+      return { city, forecast };
     } catch (error) {
       console.log(error.message);
-      return city;
+      let errorMessage =
+        "Unfortunately, there is no weather data for this location";
+      if (error.response && error.response.status === 400) {
+        errorMessage =
+          "Unfortunately, there is no weather data for this location. Please change the city.";
+      }
+      return { city, errorMessage };
     }
   }
 );
@@ -36,7 +43,7 @@ export const fetchCitySuggestions = createAsyncThunk(
     const options = {
       method: "GET",
       url: "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
-      params: { namePrefix: searchTerm, limit: 5, offset: 0 },
+      params: { namePrefix: searchTerm, types: "CITY", limit: 5, offset: 0 },
       headers: {
         "X-RapidAPI-Key": rapidApiKey,
         "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
